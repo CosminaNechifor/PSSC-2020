@@ -1,0 +1,15 @@
+Functionalitati ale aplicatiei StackOverflow:
+	- utilizatorii posteaza solutii pentru diverse teme, probleme pentru developers
+	- se sugereaza un subiect pentru care tema curenta ar fi duplicat :"possible duplicate"
+	- se pot adauga comentarii
+	- se pot vota postarile
+	- poti vedea toti utilizatorii care au cont si postarile fiecaruia
+	- se poate vizualiza activitatea pentru fiecare postare( un fel de istoric)
+	- exista tag-uri
+	- poti adauga propriile intrebari
+	- exista posibilitatea sa creezi cont si sa te conectezi sau sa vezi continutul(public questions and answers) fara sa te conectezi
+	- exista filtru pentru intrebari
+	- exista posibilitatea de search
+	- exista ramura de "About" unde se prezinta scopul aplicatiei si grupul tinta de clienti.
+	- exista ramura de "Products" care cuprinde mai multe servicii (Stack Overflow for Teams, Jobs etc.)
+	- exista ramura "find a job" care este un fel de portal pentru job-uri.
