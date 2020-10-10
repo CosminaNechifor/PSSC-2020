@@ -1,0 +1,32 @@
+Workflows
+● Bounded context: “Question context"
+	○ Workflow: “Post question”
+		■ Triggered by: “Ask a question request received”
+		■ Input: “Question information form” (Display title, body, tags)
+		■ Other inputs(dependencies)
+		■ Output: “Question posted” event
+		■ Side effects: Manual review
+
+Workflows documentation
+● Workflow: “Post question”
+	○ Input: “Question information form”
+	○ Output: “Question posted” event or Review question form
+//step1
+	Do validate question information form
+	If form is invalid then
+	stop
+//step2
+	Review manual question information
+//step3 
+	return “Question posted” event
+
+● Substep “Validate question information form”
+	○ input: “Unvalidated question information form”
+	○ output: “Validated question information form”
+	○ dependencies: title validator, body validator, tags validator
+● validate the question title
+● validate the question body
+● validate the question tags
+● If all validations passed then
+	■ return validated question information form
+● Else return Validation error
