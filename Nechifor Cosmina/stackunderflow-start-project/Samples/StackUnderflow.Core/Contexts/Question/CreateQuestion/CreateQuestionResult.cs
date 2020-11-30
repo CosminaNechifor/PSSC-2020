@@ -17,10 +17,10 @@ namespace StackUnderflow.Domain.Core.Contexts.Question.CreateQuestion
         public class QuestionCreated : ICreateQuestionResult
         {
             public User Author { get; }
-            public QuestionBody Question { get; }
-            public QuestionCreated(QuestionBody question)
+            public Post Question { get; }
+            public QuestionCreated(Post post)
             {
-                Question = question;
+                Question = post;
             }
 
             public object Clone() => this.ShallowClone();

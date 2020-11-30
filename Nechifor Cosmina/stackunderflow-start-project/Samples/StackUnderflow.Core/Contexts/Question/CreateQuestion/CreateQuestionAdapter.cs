@@ -34,22 +34,22 @@ namespace StackUnderflow.Domain.Core.Contexts.Question
             return result;
         }
 
-        public ICreateQuestionResult AddQuestionIfMissing(QuestionWriteContext state, QuestionBody question)
+        public ICreateQuestionResult AddQuestionIfMissing(QuestionWriteContext state, Post post)
         {
-            if (state.Questions.Any(p => p.Title.Equals(question.Title)))
+            if (state.Questions.Any(p => p.Title.Equals(post.Title)))
                 return new QuestionNotCreated();
-            if (state.Questions.All(p => p.QuestionId != question.QuestionId))
-                state.Questions.Add(question);
-            return new QuestionCreated( question);
+            if (state.Questions.All(p => p.PostId != post.PostId))
+                state.Questions.Add(post);
+            return new QuestionCreated(post);
         }
 
-        private QuestionBody CreateQuestionFromCommand(CreateQuestionCmd cmd)
+        private Post CreateQuestionFromCommand(CreateQuestionCmd cmd)
         {
-            var question = new QuestionBody()
+            var question = new Post()
             {
                 Title = cmd.Title,
-                Body = cmd.Body,
-                Tags = cmd.Tags
+                PostText = cmd.Body,
+                PostTag = cmd.Tags
             };
             return question;
         }
