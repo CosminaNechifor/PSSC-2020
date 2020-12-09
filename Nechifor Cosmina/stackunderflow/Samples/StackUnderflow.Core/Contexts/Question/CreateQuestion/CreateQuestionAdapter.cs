@@ -39,7 +39,7 @@ namespace StackUnderflow.Domain.Core.Contexts.Question
                 return new QuestionNotCreated();
             if (state.Questions.All(p => p.PostId != post.PostId))
                 state.Questions.Add(post);
-            return new QuestionCreated(post);
+            return new QuestionCreated(post, post.TenantUser.User);
         }
 
         private Post CreateQuestionFromCommand(CreateQuestionCmd cmd)
