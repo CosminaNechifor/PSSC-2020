@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\stackunderflow-dani.iercan-start-project\GrainImplementation\GrainImplementation.csproj" />
+    <ProjectReference Include="..\..\GrainImplementation\GrainImplementation.csproj" />
+    <ProjectReference Include="..\..\GrainInterfaces\GrainInterfaces.csproj" />
     <ProjectReference Include="..\..\Primitives\Access.Primitives.EFCore\Access.Primitives.EFCore.csproj" />
     <ProjectReference Include="..\..\Primitives\Access.Primitives.IO.Extensions\Access.Primitives.IO.Extensions.csproj" />
     <ProjectReference Include="..\..\Primitives\Access.Primitives.IO\Access.Primitives.IO.csproj" />

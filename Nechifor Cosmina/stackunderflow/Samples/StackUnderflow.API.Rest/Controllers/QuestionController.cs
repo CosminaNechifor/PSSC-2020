@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LanguageExt;
-using GrainInterfaces;
 using Orleans;
 using Microsoft.AspNetCore.Http;
+using GrainInterfaces;
 
 namespace StackUnderflow.API.AspNetCore.Controllers
 {
@@ -43,7 +43,7 @@ namespace StackUnderflow.API.AspNetCore.Controllers
 
             var dependencies = new QuestionDependencies();
             dependencies.GenerateConfirmationToken = () => Guid.NewGuid().ToString();
-            dependencies.SendConfirmationEmail = (ConfirmationLetter letter) => async () => new ConfirmationAcknowledgement(Guid.NewGuid().ToString());
+            dependencies.SendConfirmationEmail = SendEmail;
 
             var expr = from createQuestionResult in QuestionDomain.CreateQuestion(createQuestionCmd)
                        let user = createQuestionResult.SafeCast<CreateQuestionResult.QuestionCreated>().Select(p => p.Author)
