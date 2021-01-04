@@ -1,4 +1,5 @@
-﻿using Access.Primitives.Extensions.Cloning;
+﻿using Access
+    .Primitives.Extensions.Cloning;
 using CSharp.Choices;
 using StackUnderflow.EF.Models;
 

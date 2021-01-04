@@ -1,4 +1,5 @@
-﻿using Orleans;
+﻿using Microsoft.EntityFrameworkCore;
+using Orleans;
 using Orleans.Streams;
 using StackUnderflow.EF.Models;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ubiety.Dns.Core;
 
 namespace GrainImplementation
 {
@@ -13,6 +15,7 @@ namespace GrainImplementation
     {
         private  StackUnderflowContext _dbContext;
         private QuestionGrain state;
+        private IList<Post> _questions;
 
         public QuestionGrain(StackUnderflowContext dbContext)
         {
@@ -24,26 +27,28 @@ namespace GrainImplementation
             var key = this.GetPrimaryKey();
             Post post = new Post();
 
-            var expPostId = from postId in post.PostId.ToString()
-                      where postId.Equals(key.ToString())
-                      select postId;
+            var expPostId= _questions.Where(p => p.PostId.Equals(key.ToString()));
 
-            var expParentPostId = from parentPostId in post.ParentPostId.ToString()
-                            where parentPostId.Equals(key.ToString())
-                            select parentPostId;
+            var expParentPostId= _questions.Where(p => p.ParentPostId.Equals(key.ToString()));
 
-
-            // subscribe to replys stream
-            var streamProvider = GetStreamProvider("SMSProvider");
-            var stream = streamProvider.GetStream<string>(Guid.Empty, "LETTER");
-            await stream.SubscribeAsync((IAsyncObserver<string>)this);
+            if (expPostId == null && expParentPostId == null)
+            {
+                //nu exista inregistrari
+            }
+            else
+            {
+                // subscribe to replys stream
+                var streamProvider = GetStreamProvider("SMSProvider");
+                var stream = streamProvider.GetStream<Post>(Guid.Empty, "questions");
+                await stream.SubscribeAsync((IAsyncObserver<Post>)this);
+            }
             
-           // return base.OnActivateAsync();
+            //return base.OnActivateAsync();
         }
 
-        //public Question GetQuestionWithReplys()
-        //{
-
-        //}
+        public async Task<IList<Post>> GetQuestionWithReplys()
+        {
+            return (IList<Post>)_dbContext.Post.Where(p => p.PostTypeId == 2).ToListAsync();
+        }
     }
 }
