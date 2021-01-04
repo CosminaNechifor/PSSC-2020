@@ -34,7 +34,7 @@ namespace StackUnderflow.API.AspNetCore.Controllers
         }
 
 
-        [HttpPost("post")]
+        [HttpPost("question")]
         public async Task<IActionResult> CreateAndConfirmationQuestion([FromBody] CreateQuestionCmd createQuestionCmd)
         {
             QuestionWriteContext ctx = new QuestionWriteContext(
@@ -65,5 +65,24 @@ namespace StackUnderflow.API.AspNetCore.Controllers
            await emialSender.SendEmailAsync(letter.Letter);
            return new ConfirmationAcknowledgement(Guid.NewGuid().ToString());
        };
+
+
+        //private static async Task DoClientWork(IClusterClient client)
+        //{
+        //    // example of calling grains from the initialized client
+        //    var friend = client.GetGrain<IEmailSender>(0);
+        //    //var response = await friend.SayHello("Good morning, HelloGrain!");
+        //    //Console.WriteLine($"\n\n{response}\n\n");
+
+        //    //Pick a guid for a chat room grain and chat room stream
+        //    var guid = Guid.Empty;
+        //    //Get one of the providers which we defined in config
+        //    var streamProvider = client.GetStreamProvider("SMSProvider");
+        //    //Get the reference to a stream
+        //    var stream = streamProvider.GetStream<string>(guid, "CHAT");
+        //    await stream.OnNextAsync("Hello event");
+        //}
+
+
     }
 }

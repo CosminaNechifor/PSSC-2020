@@ -50,7 +50,7 @@ namespace StackUnderflow.API.AspNetCore.Controllers
         var r = await _interpreter.Interpret(expr, ctx, dependencies);
         _dbContext.SaveChanges();
         return r.createQuestionResult.Match(
-            created => (IActionResult)Ok(created.Post. .TenantId),
+            created => (IActionResult)Ok(created.Tenant.TenantId),
             notCreated => StatusCode(StatusCodes.Status500InternalServerError, "Question could not be created."),//todo return 500 (),
         invalidRequest => BadRequest("Invalid request."));
 
